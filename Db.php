@@ -49,7 +49,7 @@ class Db {
 
     public function createHit($table, $origin, $destination) {
 
-        return $this->conn->query('INSERT INTO ' . $table . ' (origem, destino) values ("' . $origin . '","' . $destination . '")');
+        return $this->conn->query('INSERT INTO ' . $table . ' (origem, destino, created_at, updated_at) values ("' . $origin . '","' . $destination . '",now(),now())');
     }
 
     public function getHit($origin, $destination) {
@@ -58,12 +58,15 @@ class Db {
         $get->execute();
         //$result->fetch(PDO::FETCH_ASSOC);
         $result = $get->fetchAll();
-        
-        return $result[0]['count'];
+        if ( ! empty($result) ) {
+            return $result[0]['count'];
+        } else {
+            return null;
+        }
     }
 
     public function addHit($origin, $destination, $count) {
 
-        return $this->conn->query('UPDATE hits set count="' . $count . '" where  origem="' . $origin . '" and destino="' . $destination . '"');
+        return $this->conn->query('UPDATE hits set count="' . $count . '", updated_at=now()  where  origem="' . $origin . '" and destino="' . $destination . '"');
     }
 }

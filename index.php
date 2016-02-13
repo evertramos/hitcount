@@ -13,16 +13,6 @@ try {
     $db = false;
 }
 
-//print_r($db);
-//die();
-
-/**
- * Add Site
- */
-//echo '<hr>';
-//$add = $db->createHit('hits','excelguru.com.br','fraternidadesemfronteiras.org.br');
-//echo '<hr>';
-
 /**
  * Add hit to website
  */
@@ -37,10 +27,13 @@ if ( $db === false ) {
 
 //$count = $db->getHit('excelguru.com.br','fraternidadesemfronteiras.org.br');
 $count = $db->getHit($origem, $destino);
+if ( empty($count) ) {
+    $db->createHit('hits',$origem, $destino);
+}
+$count = $db->getHit($origem, $destino);
 $count=$count+1;
 
 $add = $db->addHit($origem, $destino, $count);
 
 header('Location:http://' . $destino);
 die();
-
