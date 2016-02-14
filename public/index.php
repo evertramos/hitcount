@@ -32,30 +32,27 @@ if ( $db == false ) {
 if ( $origem == '' ) {
     $all = $db->getAllHits();
  
-    print_r($all);
     echo '<hr>';
 
     echo '<table border="1">';
     echo '<tr>';
-//    echo '<th>id</th>';
     echo '<th>origem</th>';
     echo '<th>destino</th>';
     echo '<th>count</th>';
-//    echo '<th>created_at</th>';
     echo '<th>updated_at</th>';
     echo '</tr>';
 
     foreach ($all as $line) {
         echo '<tr>';
         foreach ($line as $key => $value ) {
-            if ( $key == 'origem') {
+            if ( $key === 'origem') {
+                echo '<td>' . $key . '-' . $value . '</td>';
+            } elseif ( $key === 'destino' ) {
                 echo '<td>' . $value . '</td>';
-            } elseif ( $key == 'destino' ) {
+            } elseif ( $key === 'count' ) {
                 echo '<td>' . $value . '</td>';
-            } elseif ( $key == 'count' ) {
-                echo '<td>' . $value . '</td>';
-            } elseif ( $key == 'updated_at' ) {
-                echo '<td>' . $value . '</td>';
+            } elseif ( $key === 'updated_at' ) {
+                echo '<td>' . date('j/m/Y', strtotime($value)) . '</td>';
             }
         }
         echo '</tr>';
@@ -79,9 +76,6 @@ if ( $origem == '' ) {
 */
 
    // echo "</tr>\n";
-
-    print_r($all);
-    echo 'empty';
     die();
 
 }
