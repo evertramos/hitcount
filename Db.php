@@ -69,4 +69,17 @@ class Db {
 
         return $this->conn->query('UPDATE hits set count="' . $count . '", updated_at=now()  where  origem="' . $origin . '" and destino="' . $destination . '"');
     }
+
+    public function getAllHits() {
+        
+        $get = $this->conn->prepare('SELECT * FROM hits');
+        $get->execute();
+        //$result->fetch(PDO::FETCH_ASSOC);
+        $result = $get->fetchAll();
+        if ( ! empty($result) ) {
+            return $result;
+        } else {
+            return null;
+        }
+    }
 }
