@@ -46,7 +46,7 @@ if ( $origem == '' ) {
         echo '<tr>';
         foreach ($line as $key => $value ) {
             if ( $key === 'origem') {
-                echo '<td>' . $key . '-' . $value . '</td>';
+                echo '<td>' . $value . '</td>';
             } elseif ( $key === 'destino' ) {
                 echo '<td>' . $value . '</td>';
             } elseif ( $key === 'count' ) {
