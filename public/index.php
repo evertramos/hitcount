@@ -38,8 +38,9 @@ if ( $origem == '' ) {
     echo '<tr>';
     echo '<th>origem</th>';
     echo '<th>destino</th>';
-    echo '<th>count</th>';
-    echo '<th>updated_at</th>';
+    echo '<th>qtd.</th>';
+    echo '<th>criado</th>';
+    echo '<th>ultimo</th>';
     echo '</tr>';
 
     foreach ($all as $line) {
@@ -51,6 +52,8 @@ if ( $origem == '' ) {
                 echo '<td>' . $value . '</td>';
             } elseif ( $key === 'count' ) {
                 echo '<td>' . $value . '</td>';
+            } elseif ( $key === 'created_at' ) {
+                echo '<td>' . date('j/m/Y', strtotime($value)) . '</td>';
             } elseif ( $key === 'updated_at' ) {
                 echo '<td>' . date('j/m/Y', strtotime($value)) . '</td>';
             }
