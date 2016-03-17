@@ -41,6 +41,7 @@ if ( $origem == '' ) {
     echo '<th>qtd.</th>';
     echo '<th>criado</th>';
     echo '<th>ultimo</th>';
+    echo '<th>m&eacute;dia mensal</th>';
     echo '</tr>';
 
     foreach ($all as $line) {
@@ -95,3 +96,4 @@ $add = $db->addHit($origem, $destino, $count);
 
 header('Location:http://' . $destino);
 die();
+
