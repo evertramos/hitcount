@@ -2,8 +2,8 @@
 
 namespace HitCount;
 
-use \PDO;
-use \Exception;
+use PDO;
+use Exception;
 /**
  * @TODO
  *
@@ -23,9 +23,10 @@ class Db {
     protected $dsn;
     protected $conn;
 
-    public function __construct() {
-        
-        require_once 'config.php';
+    public function __construct() 
+    {        
+        require_once __DIR__ . '/config.php';
+
         $this->host = $host;
         $this->db = $db;
         $this->charset = $charset;

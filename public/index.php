@@ -4,9 +4,13 @@ error_reporting(E_ALL);
 ini_set('display_errors','On');
 
 require_once(__DIR__ . '/../Db.php');
+require_once(__DIR__ . '/datetime.php');
 
 use HitCount\Db;
 
+/**
+ * Start Db class
+ */
 try {
     $db = new Db;
 } catch (Exception $e) {
@@ -22,13 +26,17 @@ $destino='';
 if ( isset($_GET['from']) ) { $origem=$_GET['from']; }
 if ( isset($_GET['to']) ) { $destino=$_GET['to']; }
 
-// check if db exist
+/**
+ * Check if db exist
+ */
 if ( $db == false ) {
     header('Location:http://' . $destino);
     die();   
 }
 
-//Show access
+/**
+ * Show access
+ */
 if ( $origem == '' ) {
     $all = $db->getAllHits();
  
@@ -52,11 +60,21 @@ if ( $origem == '' ) {
             } elseif ( $key === 'destino' ) {
                 echo '<td>' . $value . '</td>';
             } elseif ( $key === 'count' ) {
+                $count = $value;
                 echo '<td>' . $value . '</td>';
             } elseif ( $key === 'created_at' ) {
+                $created = new DateTime($value);
                 echo '<td>' . date('j/m/Y', strtotime($value)) . '</td>';
+
             } elseif ( $key === 'updated_at' ) {
+                $updated = new DateTime($value);
                 echo '<td>' . date('j/m/Y', strtotime($value)) . '</td>';
+                $diff = diffInMonths($created, $updated);
+                echo '<td>';
+                if ( $diff > 0 ) {
+                    echo $count / $diff;
+                }
+                echo '</td>';
             }
         }
         echo '</tr>';

@@ -1,7 +1,9 @@
+-- Creates database
+CREATE DATABASE IF NOT EXISTS budhi;
 
 -- creating tables for HitCount
-DROP TABLE IF EXISTS hits;
-CREATE TABLE hits (
+DROP TABLE IF EXISTS budhi.hits;
+CREATE TABLE budhi.hits (
   id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   origem varchar(50) NOT NULL,
   destino varchar(50) NOT NULL,
